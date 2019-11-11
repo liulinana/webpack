@@ -42,8 +42,8 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.HashedModuleIdsPlugin(),
         new MiniCssExtractPlugin({
-            filename: "[name].[contenthash].css",
-            chunkFilename: "[id].[contenthash].css"
+            filename: "./css/[name].[contenthash].css",
+            chunkFilename: "./css/[id].[contenthash].css"
         }),
     ],
     module: {
