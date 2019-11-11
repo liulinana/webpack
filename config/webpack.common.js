@@ -4,7 +4,8 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -12,13 +13,19 @@ module.exports = {
     },
     output: {
         filename: '[name].[hash].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../dist'),
         chunkFilename: '[name].bundle.js',
         publicPath: '/'
     },
     optimization: {
         splitChunks:{
             cacheGroups: {
+                styles: {
+                    name: 'styles',
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true
+                },
                 vendor: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
@@ -29,32 +36,59 @@ module.exports = {
         runtimeChunk: 'single',
         minimizer: [
             new TerserJSPlugin({}),
-            new OptimizeCSSAssetsPlugin({})
+            // new OptimizeCSSAssetsPlugin({
+            //     assetNameRegExp: /\.css$/g,
+            //     cssProcessor: require('cssnano'),
+            //     cssProcessorPluginOptions: {
+            //         preset: ['default', {
+            //             discardComments: {
+            //                 removeAll: true,
+            //             },
+            //             normalizeUnicode: false
+            //         }]
+            //     },
+            //     canPrint: true
+            // })
         ]
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({title: 'Caching'}),
+        new HtmlWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.HashedModuleIdsPlugin(),
         new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css"
-        })
+            filename: "[name].[contenthash].css",
+            chunkFilename: "[id].[contenthash].css"
+        }),
     ],
     module: {
         rules: [
             {
                 test: /\.js$/,
                 include: path.resolve(__dirname, 'src'),
-                loader: 'babel-loader'
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015']
+                    }
+                }]
             },
             {
                 test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'style-loader',
-                    'css-loader'
+                    'css-loader',
+                    // {
+                    //     loader: 'postcss-loader',
+                    //     options: {
+                    //         plugins: [
+                    //             require('postcss-import')(),
+                    //             require('autoprefixer')({
+                    //                 browsers: ['last 30 versions', "> 2%", "Firefox >= 10", "ie 6-11"]
+                    //             })
+                    //         ]
+                    //     }
+                    // }
                 ]
             },
             {
