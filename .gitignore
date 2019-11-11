@@ -1,0 +1,39 @@
+output
+local
+.cov
+test/unit/coverage
+test/e2e/reports
+node_modules
+# dist
+.naeindex
+coverage.html
+.monitor
+
+#*.min.*.js
+#*.min.*.css
+#assets.json
+
+# Ignore Mac OS desktop services redux
+.DS_Store
+
+# Ignore Windows desktop setting file
+desktop.ini
+
+*.log
+.idea/workspace.xml
+.idea
+
+build
+*.sublime-project
+*.sublime-workspace
+*.swp
+bak
+npm-debug.log
+dist/
+local-script
+all-routes.js
+page-routes.js
+page-init-state.js
+.happypack
+local-config.js
+/local/
