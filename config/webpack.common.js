@@ -4,8 +4,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -36,19 +34,6 @@ module.exports = {
         runtimeChunk: 'single',
         minimizer: [
             new TerserJSPlugin({}),
-            // new OptimizeCSSAssetsPlugin({
-            //     assetNameRegExp: /\.css$/g,
-            //     cssProcessor: require('cssnano'),
-            //     cssProcessorPluginOptions: {
-            //         preset: ['default', {
-            //             discardComments: {
-            //                 removeAll: true,
-            //             },
-            //             normalizeUnicode: false
-            //         }]
-            //     },
-            //     canPrint: true
-            // })
         ]
     },
     plugins: [
@@ -65,11 +50,11 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                include: path.resolve(__dirname, 'src'),
+                include: path.resolve(__dirname, '../src'),
                 use: [{
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015']
+                        presets: ['@babel/preset-env']
                     }
                 }]
             },
@@ -78,17 +63,6 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
-                    // {
-                    //     loader: 'postcss-loader',
-                    //     options: {
-                    //         plugins: [
-                    //             require('postcss-import')(),
-                    //             require('autoprefixer')({
-                    //                 browsers: ['last 30 versions', "> 2%", "Firefox >= 10", "ie 6-11"]
-                    //             })
-                    //         ]
-                    //     }
-                    // }
                 ]
             },
             {

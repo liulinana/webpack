@@ -2,7 +2,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
 const UglifyJsPlugin  = require('uglifyjs-webpack-plugin');
-let ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 
 module.exports = merge(common, {
@@ -10,25 +10,27 @@ module.exports = merge(common, {
     devtool: 'source-map',
     optimization: {
         minimizer: [
-            // new UglifyJsPlugin({
-            //     sourceMap: true,
-            // })
+            new UglifyJsPlugin({
+                sourceMap: true,
+            })
         ],
     },
     plugins:[
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
-        // new ParallelUglifyPlugin({
-        //     cacheDir: '.cache/',
-        //     uglifyJS:{
-        //         output: {
-        //             comments: false
-        //         },
-        //         compress: {
-        //             warnings: false
-        //         }
-        //     }
+        // new OptimizeCSSAssetsPlugin({
+        //     assetNameRegExp: /\.css$/g,
+        //     cssProcessor: require('cssnano'),
+        //     cssProcessorPluginOptions: {
+        //         preset: ['default', {
+        //             discardComments: {
+        //                 removeAll: true,
+        //             },
+        //             normalizeUnicode: false
+        //         }]
+        //     },
+        //     canPrint: true
         // })
     ]
 });
