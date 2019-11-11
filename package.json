@@ -1,0 +1,40 @@
+{
+  "name": "webpack-test",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "sideEffects": [
+    "./src/some-side-effectful-file.js",
+    "*.css"
+  ],
+  "scripts": {
+    "dev": "npx webpack --config webpack.dev.js --colors",
+    "start": "webpack-dev-server --open --config webpack.dev.js --color",
+    "server": "node server.js",
+    "dev-server": "node dev-server.js",
+    "build": "webpack --config webpack.prod.js --colors",
+    "watch": "webpack --watch"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "csv-loader": "^3.0.2",
+    "express": "^4.17.1",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "lodash": "^4.17.15",
+    "mini-css-extract-plugin": "^0.8.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^2.2.1",
+    "webpack": "^4.41.2"
+  }
+}
