@@ -1,7 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const webpack = require('webpack');
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -37,10 +35,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.HashedModuleIdsPlugin(),
         new MiniCssExtractPlugin({
             filename: "./css/[name].[contenthash].css",
             chunkFilename: "./css/[id].[contenthash].css"
