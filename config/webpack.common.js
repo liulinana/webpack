@@ -1,7 +1,9 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -18,7 +20,7 @@ module.exports = {
             cacheGroups: {
                 styles: {
                     name: 'styles',
-                    test: /\.css$/,
+                    test: /\.(c|le)ss$/,
                     chunks: 'all',
                     enforce: true
                 },
@@ -27,7 +29,8 @@ module.exports = {
                     name: 'vendors',
                     chunks: 'all'
                 }
-            }
+            },
+
         },
         runtimeChunk: 'single',
         minimizer: [
@@ -35,11 +38,20 @@ module.exports = {
         ]
     },
     plugins: [
+
         new HtmlWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: "./css/[name].[contenthash].css",
-            chunkFilename: "./css/[id].[contenthash].css"
+            filename: "css/[name].[hash].css",
+            chunkFilename: "css/[id].[hash].css"
         }),
+        new webpack.HashedModuleIdsPlugin(),
+        // new webpack.optimize.LimitChunkCountPlugin({
+        //     maxChunks: 5, // 必须大于或等于 1
+        //     minChunkSize: 1000
+        // }),
+        // new webpack.optimize.MinChunkSizePlugin({
+        //     minChunkSize: 10000 // Minimum number of characters
+        // })
     ],
     module: {
         rules: [
@@ -54,10 +66,11 @@ module.exports = {
                 }]
             },
             {
-                test: /\.css$/,
+                test: /\.(c|le)ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
+                    'less-loader',
                 ]
             },
             {

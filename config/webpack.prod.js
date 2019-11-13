@@ -15,9 +15,9 @@ module.exports = merge(common, {
                 sourceMap: true,
             }),
             new OptimizeCssAssetsPlugin({
-                assetNameRegExp: /\.optimize\.css$/g,
+                assetNameRegExp: /\.less\.css$/g,
                 cssProcessor: require('cssnano'),
-                cssProcessorOptions: { safe: true, discardComments: { removeAll: true } },
+                cssProcessorOptions: { discardComments: { removeAll: true } },
                 canPrint: true
             }),
         ],

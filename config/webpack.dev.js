@@ -6,13 +6,10 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer:{
-        contentBase: '../dist',
-        hot: true,
         host: 'localhost',
         open: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.HashedModuleIdsPlugin(),
     ]
 });
