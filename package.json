@@ -37,7 +37,6 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "cssnano": "^4.1.10",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "http-server": "^0.11.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
