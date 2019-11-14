@@ -12,7 +12,7 @@ module.exports = {
         filename: '[name].[hash].js',
         path: path.resolve(__dirname, '../dist'),
         chunkFilename: 'static/js/[name].bundle.js',
-        publicPath: '/'
+        publicPath: './'
     },
     optimization: {
         splitChunks:{
@@ -74,9 +74,14 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
+                use: [{
+                    loader:'file-loader',
+                    options:{
+                        name:'[name].[hash:5].[ext]',
+                        outputPath:'static/image',
+                        publicPath: '../image'
+                    }
+                }],
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
