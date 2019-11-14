@@ -44,13 +44,13 @@ module.exports = {
             chunkFilename: "static/css/[id].[hash].css"
         }),
         new webpack.HashedModuleIdsPlugin(),
-        // new webpack.optimize.LimitChunkCountPlugin({
-        //     maxChunks: 5, // 必须大于或等于 1
-        //     minChunkSize: 1000
-        // }),
-        // new webpack.optimize.MinChunkSizePlugin({
-        //     minChunkSize: 10000 // Minimum number of characters
-        // })
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 5, // 必须大于或等于 1
+            minChunkSize: 1000
+        }),
+        new webpack.optimize.MinChunkSizePlugin({
+            minChunkSize: 10000 // Minimum number of characters
+        })
     ],
     module: {
         rules: [
