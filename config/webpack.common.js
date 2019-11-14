@@ -11,7 +11,7 @@ module.exports = {
     output: {
         filename: '[name].[hash].js',
         path: path.resolve(__dirname, '../dist'),
-        chunkFilename: '[name].bundle.js',
+        chunkFilename: 'static/js/[name].bundle.js',
         publicPath: '/'
     },
     optimization: {
@@ -40,8 +40,8 @@ module.exports = {
 
         new HtmlWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: "css/[name].[hash].css",
-            chunkFilename: "css/[id].[hash].css"
+            filename: "static/css/[name].[hash].css",
+            chunkFilename: "static/css/[id].[hash].css"
         }),
         new webpack.HashedModuleIdsPlugin(),
         // new webpack.optimize.LimitChunkCountPlugin({
@@ -70,7 +70,7 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     'css-loader',
                     'less-loader',
-                ]
+                ],
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
