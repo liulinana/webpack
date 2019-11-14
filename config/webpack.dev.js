@@ -7,7 +7,14 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     devServer:{
         host: 'localhost',
-        open: true
+        open: true,
+        proxy: {
+            "/api": {
+                "target": "http://192.168.1.120",
+                "changeOrigin": true,
+                "pathRewrite": {"^/api": "/api"}
+            }
+        }
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
