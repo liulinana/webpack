@@ -7,6 +7,7 @@ const options = {
 };
 
 webpackDevServer.addDevServerEntrypoints(config, options);
+
 const compiler = webpack(config);
 const server = new webpackDevServer(compiler, options);
 
